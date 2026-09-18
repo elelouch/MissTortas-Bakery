@@ -1,0 +1,20 @@
+Notas: para no repetir esta bueno tener escenarios alternativos en un mismo caso de uso.
+Categoria de Producto.
+Tengo que revisar que las categorías no están existan en el Sistema. Guiar al usuario.
+Muestro un combo vacio, debo.
+BORRAR Precondición de Categorías, que ocurre si no tengo categorías.
+Unificar todo en un caso de uso.
+NO DEPENDER tanto de la precondición.
+Puedo plantear un filtro dentro.
+Utilizar el nombre de producto como primary key, puedo realizarlo por categoría.
+Verificar que TODO LO COMBEABLE no tenga problemas 
+AGREGAR FILTROS EN LA BAJA.
+LO QUE HAGO EN REALIDAD, ES CAMBIARLE EL ESTADO EN LA TABLA.
+CUANDO YO TENGO ALGO.
+REVISAR QUE TODAS LAS RELACIONES QUEDEN QUE AFECTA EN MI BAJA.
+CHECKEO MEJOR DONDE ME PEGA LA BAJA ANALIZARLO MEJOR.
+REVISAR RELACIONES DONDE TENGO EL CASO DE LA BAJA.  REVISAR MEJOR QUE PUEDO ANALIZAR.
+AGREGAR UN FILTRO PADRE
+
+
+TENER EN CUENTA QUE EL SISTEMA NO PUEDE TENER EL CASO DE 

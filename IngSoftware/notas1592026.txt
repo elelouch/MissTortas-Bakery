@@ -1,0 +1,5 @@
+casos de uso corresponde
+a que scenario corresponde 
+cuales son los pasos a seguir
+ultima columna debe tener una descripcion de que fallo. Resultado obtenido.
+agrego el estado,
