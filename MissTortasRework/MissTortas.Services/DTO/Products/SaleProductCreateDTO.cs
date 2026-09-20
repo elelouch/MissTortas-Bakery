@@ -7,7 +7,7 @@
         public decimal Quantity { get; set; }
         public bool IsAvailable { get; set; }
         public long CategoryId { get; set; }
-        public string Unit { get; set; } = string.Empty;
+        public long UnitId { get; set; }
         public string SaleDescription { get; set; } = string.Empty;
         public string SaleImagePath { get; set; } = string.Empty;
     }

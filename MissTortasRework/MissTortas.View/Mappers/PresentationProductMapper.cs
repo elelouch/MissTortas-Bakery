@@ -13,7 +13,7 @@ namespace MissTortas.View.Mappers
                 SalePrice = request.SalePrice,
                 Quantity = request.SaleQuantity,
                 CategoryId = request.CategoryId,
-                Unit = request.Unit,
+                UnitId = request.Unit,
                 SaleDescription = request.SaleDescription,
                 SaleImagePath = request.SaleImagePath,
                 IsAvailable = false

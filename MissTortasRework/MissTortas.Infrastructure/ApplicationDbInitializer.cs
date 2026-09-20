@@ -149,6 +149,11 @@ namespace MissTortas.Infrastructure
                 }
             }
         }
+
+        public async static Task SeedUnitsAsync()
+        {
+
+        }
     }
 }
 

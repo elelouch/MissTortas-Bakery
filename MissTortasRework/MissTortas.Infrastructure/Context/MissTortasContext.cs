@@ -13,6 +13,7 @@ namespace MissTortas.Infrastructure.Context
 {
     public class MissTortasContext(DbContextOptions options) : IdentityDbContext<ApplicationUser, ApplicationRole, string>(options)
     {
+        public DbSet<Unit> Units { get; set; } = default!;
         public DbSet<Product> Products { get; set; } = default!;
         public DbSet<ProductDetail> ProductDetails { get; set; } = default!;
         public DbSet<SaleProduct> SaleProducts { get; set; } = default!;

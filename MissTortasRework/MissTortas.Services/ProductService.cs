@@ -35,12 +35,23 @@ namespace MissTortas.Services
             var productCategory = await productRepository.FindProductCategoryAsync(dto.CategoryId) ?? throw new EntityNotFoundException("Category not found", "CATNF0");
             if (!productCategory.IsFinal)
             {
-                throw new ChildAppendException("Cannot append a product on a Category that is not final");
+                throw new ChildAppendException("Cannot append a product on a Category that is not final.");
+            }
+            if (!productCategory.Enabled)
+            {
+                throw new ChildAppendException("Cannot append a product on a Category that is disabled.");
+            }
+
+            var unit = await productRepository.FindUnitByIdAsync(dto.UnitId) ?? throw new UnitNotFoundException("Unit not found.");
+
+            if(dto.Quantity < 0)
+            {
+                throw new InvalidOperationException("Cannot set negative quantities.");
             }
 
             var product = new Product
             {
-                Unit = dto.Unit,
+                Unit = unit,
                 Name = dto.Name,
                 ProductDetail = productDetail,
                 ProductCategory = productCategory,
@@ -79,7 +90,7 @@ namespace MissTortas.Services
                 CategoryId = dto.CategoryId,
                 Description = dto.SaleDescription,
                 ManageQuantityAsInteger = true, // sale products are offered by units.
-                Unit = dto.Unit,
+                UnitId = dto.UnitId,
                 Quantity = dto.Quantity
             };
             var stockProduct = await CreateProductEntityAsync(productCreateDTO);

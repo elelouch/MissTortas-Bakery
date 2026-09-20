@@ -14,6 +14,7 @@ namespace MissTortas.View.Validators.Products
             RuleFor(createProduct => createProduct.Name).NotEmpty().Length(NameMinLength, NameMaxLength);
             RuleFor(createProduct => createProduct.Description).MaximumLength(DescriptionMaxLength);
             RuleFor(createProduct => createProduct.CategoryId).NotEmpty().InclusiveBetween(1, MaxProductId);
+            RuleFor(createProduct => createProduct.Quantity).InclusiveBetween(0, decimal.MaxValue - 1);
         }
     }
 }

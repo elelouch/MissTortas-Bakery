@@ -1,10 +1,13 @@
 ﻿using MissTortas.Domain.Products;
 using MissTortas.Services.Repositories.DTO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MissTortas.Services.Repositories
 {
     public interface IProductRepository : IRepositoryCrud<Product>
     {
+        public Task<List<Unit>> GetAllUnitsAsync();
+        public Task<Unit?> FindUnitByIdAsync(long id);
         public Task<List<SaleProductDADto>> GetAllSaleProductsAsync();
         public Task<List<SaleProduct>> GetSaleProductsFromCategoryAsync(long categoryId);
         public Task<List<ProductDADto>> GetProductsFromCategoryAsync(long categoryId);

@@ -8,6 +8,7 @@ namespace MissTortas.Infrastructure.Repositories
 {
     public class ProductRepository(MissTortasContext context) : RepositoryCrud<Product>(context), IProductRepository
     {
+        private readonly DbSet<Unit> unitsSet = context.Units;
         private readonly DbSet<Product> productsSet = context.Products;
         private readonly DbSet<ProductDetail> productsDetailSet = context.ProductDetails;
         private readonly DbSet<SaleProduct> saleProductSet = context.SaleProducts;
@@ -101,6 +102,16 @@ namespace MissTortas.Infrastructure.Repositories
                 .ToSaleProductDADto()
                 .ToListAsync();
             return ret;
+        }
+
+        public Task<Unit?> FindUnitByIdAsync(long id)
+        {
+            return unitsSet.Where(u => u.Id == id).SingleOrDefaultAsync();          
+        }
+
+        public Task<List<Unit>> GetAllUnitsAsync()
+        {
+            return unitsSet.ToListAsync();
         }
     }
 }
