@@ -44,6 +44,11 @@ namespace MissTortas.Infrastructure.Context
                 sp.ToTable(t => t.HasCheckConstraint("CK_SaleProduct_NonNegativeQuantity", "\"SaleQuantity\" >= 0"));
             });
 
+            modelBuilder.Entity<Unit>(unit =>
+            {
+                unit.Property(u => u.Name).IsRequired();
+                unit.HasIndex(u => u.Name).IsUnique();
+            });
 
             modelBuilder.Entity<RefreshTokenEntity>(entity =>
             {

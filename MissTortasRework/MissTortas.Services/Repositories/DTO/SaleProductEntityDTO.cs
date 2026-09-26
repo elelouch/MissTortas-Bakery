@@ -3,7 +3,6 @@
     public class SaleProductEntityDTO
     {
         public long SaleProductId { get; set; }
-        public bool ManageQuantityAsInteger { get; set; }
-
+        public bool AllowDecimalAsk { get; set; }
     }
 }

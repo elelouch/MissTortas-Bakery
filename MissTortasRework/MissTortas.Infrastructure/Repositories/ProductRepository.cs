@@ -76,7 +76,7 @@ namespace MissTortas.Infrastructure.Repositories
                 sp => new SaleProductEntityDTO
                 {
                     SaleProductId = sp.SaleProductId,
-                    ManageQuantityAsInteger = sp.Product.ManageQuantityAsInteger
+                    AllowDecimalAsk = !sp.Product.Unit.TreatAsInteger
                 }).Where(sp => sp.SaleProductId == id)
                 .SingleOrDefaultAsync();
             return ret;
@@ -112,6 +112,11 @@ namespace MissTortas.Infrastructure.Repositories
         public Task<List<Unit>> GetAllUnitsAsync()
         {
             return unitsSet.ToListAsync();
+        }
+
+        public async Task InsertUnitAsync(Unit unit)
+        {
+           await unitsSet.AddAsync(unit);
         }
     }
 }

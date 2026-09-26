@@ -1,11 +1,14 @@
 ﻿using MissTortas.Domain.Products;
 using MissTortas.Services.DTO.Products;
+using MissTortas.Services.Interfaces;
 using MissTortas.Services.Repositories.DTO;
 
 namespace MissTortas.Services.Mapping.Interfaces
 {
     public interface IProductMapper
     {
+        public UnitDTO ToUnitDTO(Unit unit);
+        public List<UnitDTO> ToUnitDTO(IEnumerable<Unit> unit);
         public List<ProductDTO> ProductToDTO(IEnumerable<ProductDADto> products);
         public List<ProductDTO> ProductToDTO(IEnumerable<Product> products);
         public ProductDTO ProductToDTO(Product product);

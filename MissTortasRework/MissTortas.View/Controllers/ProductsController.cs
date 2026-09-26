@@ -52,11 +52,18 @@ namespace MissTortas.View.Controllers
                 Name = dto.Name,
                 Description = dto.Description,
                 CategoryId = dto.CategoryId,
-                ManageQuantityAsInteger = dto.ManageQuantityAsInteger,
                 Quantity = dto.Quantity,
                 UnitId = dto.UnitId
             };
             var p = await productService.CreateProductAsync(productDto);
+            return p;
+        }
+
+        [Authorize(Policy = PolicyName.ManageProducts)]
+        [HttpGet("units")]
+        public async Task<List<UnitDTO>> GetUnits()
+        {
+            var p = await productService.GetAllUnitsAsync();
             return p;
         }
 

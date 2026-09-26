@@ -1,5 +1,6 @@
 ﻿using MissTortas.Domain.Products;
 using MissTortas.Services.DTO.Products;
+using MissTortas.Services.Interfaces;
 using MissTortas.Services.Mapping.Interfaces;
 using MissTortas.Services.Repositories.DTO;
 
@@ -7,6 +8,21 @@ namespace MissTortas.Services.Mapping
 {
     public class ProductMapper : IProductMapper
     {
+        public List<UnitDTO> ToUnitDTO(IEnumerable<Unit> units)
+        {
+            return [.. units.Select(ToUnitDTO)];
+        }
+
+        public UnitDTO ToUnitDTO(Unit unit)
+        {
+            return new UnitDTO
+            {
+                Id = unit.Id,
+                Name = unit.Name,
+                TreatAsInteger = unit.TreatAsInteger
+            };
+        }
+
         public ProductCategoryDTO CategoryToDTO(ProductCategory category)
         {
             return new ProductCategoryDTO
@@ -83,9 +99,8 @@ namespace MissTortas.Services.Mapping
                 Name = product.Name,
                 Description = product.ProductDetail?.Description ?? string.Empty,
                 CategoryId = product.ProductCategoryId,
-                Unit = product.Unit,
+                UnitId = product.Unit.Id,
                 Quantity = product.Quantity,
-                ManageQuantityAsInteger = product.ManageQuantityAsInteger,
                 Enabled = product.Enabled
             };
         }
@@ -98,7 +113,6 @@ namespace MissTortas.Services.Mapping
                 Name = product.Product.Name,
                 Price = product.SalePrice,
                 Quantity = product.SaleQuantity,
-                AllowDecimalAsk = product.Product.ManageQuantityAsInteger,
                 StockProductId = product.ProductId
             };
         }
@@ -130,9 +144,8 @@ namespace MissTortas.Services.Mapping
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
-                Unit = product.Unit,
+                UnitId = product.UnitId,
                 Quantity = product.Quantity,
-                ManageQuantityAsInteger = product.ManageQuantityAsInteger,
                 Enabled = product.Enabled
             };
         }
@@ -151,7 +164,6 @@ namespace MissTortas.Services.Mapping
                 Price = dto.SalePrice,
                 Name = dto.Name,
                 Description = dto.Description,
-                AllowDecimalAsk = !dto.ManageQuantityAsInteger,
                 StockProductId = dto.StockProductId
             };
         }

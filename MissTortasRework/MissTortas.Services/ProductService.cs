@@ -55,7 +55,6 @@ namespace MissTortas.Services
                 Name = dto.Name,
                 ProductDetail = productDetail,
                 ProductCategory = productCategory,
-                ManageQuantityAsInteger = dto.ManageQuantityAsInteger,
                 Quantity = dto.Quantity,
                 Enabled = true
             };
@@ -89,7 +88,6 @@ namespace MissTortas.Services
                 Name = dto.Name,
                 CategoryId = dto.CategoryId,
                 Description = dto.SaleDescription,
-                ManageQuantityAsInteger = true, // sale products are offered by units.
                 UnitId = dto.UnitId,
                 Quantity = dto.Quantity
             };
@@ -173,8 +171,12 @@ namespace MissTortas.Services
             }
             if (dto.Quantity is decimal quantity)
             {
-                var qty = ValidateQuantity(quantity, product.ManageQuantityAsInteger);
-                product.Quantity = qty.DecimalQuantity;
+                var qtyIsInteger = Math.Floor(quantity) == quantity;
+                if (product.Unit.TreatAsInteger && !qtyIsInteger)
+                {
+                    throw new AskQuantityException("Quantity is not valid, try an integer quantity.");
+                }
+                product.Quantity = quantity;
             }
             if (dto.CategoryId is long categoryId)
             {
@@ -191,21 +193,6 @@ namespace MissTortas.Services
             productRepository.Update(product);
             await productRepository.SaveChangesAsync();
             return productMapper.ProductToDTO(product);
-        }
-
-        private static QuantityHolder ValidateQuantity(decimal qty, bool mustBeInteger)
-        {
-            var qtyIsInteger = Math.Floor(qty) == qty;
-            if (mustBeInteger && !qtyIsInteger)
-            {
-                throw new AskQuantityException("Quantity is not valid, try an integer quantity.");
-            }
-            var intQty = (long)Math.Floor(qty);
-            if (mustBeInteger && intQty < 0 && intQty > (long.MaxValue - 1024))
-            {
-                throw new AskQuantityException("The quantity is negative. It is not valid.");
-            }
-            return new QuantityHolder { DecimalQuantity = qty };
         }
 
         public async Task<List<SaleProductDTO>> GetSaleProductsFromCategoryAsync(long categoryId)
@@ -247,7 +234,6 @@ namespace MissTortas.Services
             var saleProductDTO = await productRepository.FindSaleProductDTOAsync(id) ?? throw new SaleProductNotFoundException($"Sale product not found. Id: {id}");
             return new SaleProductDTO
             {
-                AllowDecimalAsk = !saleProductDTO.ManageQuantityAsInteger,
                 Id = saleProductDTO.SaleProductId
             };
         }
@@ -327,5 +313,25 @@ namespace MissTortas.Services
             var products = await productRepository.GetAllSaleProductsAsync();
             return productMapper.SaleProductToDTO(products);
         }
+
+        public async Task<UnitDTO> CreateUnitAsync(UnitDTO unitDto)
+        {
+            Unit unit = await productRepository.FindUnitByIdAsync(unitDto.Id) ?? new()
+            {
+                Name = unitDto.Name,
+                TreatAsInteger = unitDto.TreatAsInteger,
+            };
+
+            await productRepository.InsertUnitAsync(unit);
+            await productRepository.SaveChangesAsync();
+            return productMapper.ToUnitDTO(unit);
+        }
+
+        public async Task<List<UnitDTO>> GetAllUnitsAsync()
+        {
+            var units = await productRepository.GetAllUnitsAsync();
+            return productMapper.ToUnitDTO(units);
+        }
+
     }
 }

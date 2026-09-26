@@ -18,9 +18,8 @@ namespace MissTortas.Infrastructure.Context
                 CategoryId = p.ProductCategoryId,
                 Description = p.ProductDetail.Description,
                 Name = p.Name,
-                Unit = p.Unit,
+                UnitId = p.Unit.Id,
                 Quantity = p.Quantity,
-                ManageQuantityAsInteger = p.ManageQuantityAsInteger,
                 Enabled = p.Enabled
             });
         }
@@ -32,11 +31,10 @@ namespace MissTortas.Infrastructure.Context
                 StockProductId = sp.ProductId,
                 Name = sp.Product.Name,
                 Description = sp.Product.ProductDetail.Description,
-                ManageQuantityAsInteger = sp.Product.ManageQuantityAsInteger,
                 SaleQuantity = sp.SaleQuantity,
                 StockQuantity = sp.Product.Quantity,
                 SalePrice = sp.SalePrice,
-                Unit = sp.Product.Unit,
+                UnitId = sp.Product.Unit.Id,
                 Enabled = sp.Product.Enabled,
                 IsAvailable = sp.IsAvailable,
                 CategoryId = sp.Product.ProductCategoryId

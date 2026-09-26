@@ -6,6 +6,7 @@ namespace MissTortas.Services.Repositories
 {
     public interface IProductRepository : IRepositoryCrud<Product>
     {
+        public Task InsertUnitAsync(Unit unit);
         public Task<List<Unit>> GetAllUnitsAsync();
         public Task<Unit?> FindUnitByIdAsync(long id);
         public Task<List<SaleProductDADto>> GetAllSaleProductsAsync();

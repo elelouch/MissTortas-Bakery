@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MissTortas.Domain.Products;
 using MissTortas.Domain.Security.Users;
 using MissTortas.Infrastructure.Context;
 using MissTortas.Infrastructure.Entity;
 using MissTortas.Infrastructure.Security.Identity;
 using MissTortas.Infrastructure.Security.Permissions;
+using MissTortas.Services;
 using MissTortas.Services.DTO.Orders;
 using MissTortas.Services.Interfaces;
 using System.Security.Claims;
@@ -68,6 +70,23 @@ namespace MissTortas.Infrastructure
                 await orderService.CreateOrderTypeAsync(ot);
             }
 
+        }
+        public static async Task SeedUnitsAsync(IServiceProvider services)
+        {
+            using var scope = services.CreateScope();
+            var productService = services.GetRequiredService<ProductService>();
+
+            UnitDTO[] units = [
+                new UnitDTO { Id = 1, Name = "unidad", TreatAsInteger = true},
+                new UnitDTO { Id = 2, Name = "kilogramo", TreatAsInteger = false},
+                new UnitDTO { Id = 3, Name = "litro", TreatAsInteger = false}
+            ];
+
+            foreach(var unit in units)
+            {
+                await productService.CreateUnitAsync(unit);
+            }
+            
         }
 
         public static async Task SeedRolesAsync(IServiceProvider services)

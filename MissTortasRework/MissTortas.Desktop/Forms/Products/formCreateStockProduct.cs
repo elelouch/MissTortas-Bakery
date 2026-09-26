@@ -149,7 +149,6 @@ namespace MissTortas.Desktop.Forms.Products
                 Name = name,
                 Description = description,
                 Quantity = qty,
-                ManageQuantityAsInteger = manageQtyAsInteger,
                 CategoryId = selected.ProductCategoryId,
                 Unit = unit,
                 Enabled = chkEnabled.Checked
@@ -162,7 +161,6 @@ namespace MissTortas.Desktop.Forms.Products
             txtProductName.Text = product.Name;
             txtDescription.Text = product.Description;
             txtQuantity.Text = product.Quantity.ToString();
-            chkManageQtyAsInteger.Checked = product.ManageQuantityAsInteger;
             txtUnitName.Text = product.Unit;
             chkEnabled.Checked = product.Enabled;
         }

@@ -2,7 +2,7 @@
 {
     public class CreateSaleProductRequest
     {
-        public string Unit { get; set; } = string.Empty;
+        public long UnitId { get; set; }
         public string SaleProductName { get; set; } = string.Empty;
         public decimal SalePrice { get; set; }
         public decimal SaleQuantity { get; set; }

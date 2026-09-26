@@ -5,6 +5,8 @@ namespace MissTortas.Services.Interfaces
 {
     public interface IProductService
     {
+        public Task<UnitDTO> CreateUnitAsync(UnitDTO unit);
+        public Task<List<UnitDTO>> GetAllUnitsAsync();
         public Task<List<ProductDTO>> AllAsync();
         public Task<List<ProductCategoryDTO>> AllProductCategoryAsync();
         public Task<List<ProductCategoryDTO>> AllProductCategoryAsync(bool enabled);

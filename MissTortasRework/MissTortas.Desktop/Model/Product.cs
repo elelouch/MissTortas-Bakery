@@ -7,7 +7,6 @@
         public string Description { get; set; } = string.Empty;
         public decimal Quantity { get; set; }
         public long CategoryId { get; set; }
-        public bool ManageQuantityAsInteger { get; set; }
         public string Unit { get; set; } = string.Empty;
         public bool Enabled { get; set; }
     }
