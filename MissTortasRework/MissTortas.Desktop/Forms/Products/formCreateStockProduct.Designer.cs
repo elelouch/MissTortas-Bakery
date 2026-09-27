@@ -33,13 +33,11 @@
             label4 = new Label();
             comboBoxCategory = new ComboBox();
             txtProductName = new TextBox();
-            chkManageQtyAsInteger = new CheckBox();
             txtQuantity = new TextBox();
             lblDescription = new Label();
             txtDescription = new TextBox();
             btnConfirm = new Button();
             btnCancel = new Button();
-            txtUnitName = new TextBox();
             lblUnitName = new Label();
             chkEnabled = new CheckBox();
             panel1 = new Panel();
@@ -47,6 +45,7 @@
             lblHeader = new Label();
             panel7 = new Panel();
             panel6 = new Panel();
+            comboBoxUnits = new ComboBox();
             panel4 = new Panel();
             panel5 = new Panel();
             panel3 = new Panel();
@@ -96,6 +95,7 @@
             // comboBoxCategory
             // 
             comboBoxCategory.Dock = DockStyle.Bottom;
+            comboBoxCategory.FlatStyle = FlatStyle.Flat;
             comboBoxCategory.FormattingEnabled = true;
             comboBoxCategory.Location = new Point(0, 13);
             comboBoxCategory.Name = "comboBoxCategory";
@@ -109,17 +109,6 @@
             txtProductName.Name = "txtProductName";
             txtProductName.Size = new Size(240, 22);
             txtProductName.TabIndex = 0;
-            // 
-            // chkManageQtyAsInteger
-            // 
-            chkManageQtyAsInteger.AutoSize = true;
-            chkManageQtyAsInteger.FlatStyle = FlatStyle.Flat;
-            chkManageQtyAsInteger.Location = new Point(1, 203);
-            chkManageQtyAsInteger.Name = "chkManageQtyAsInteger";
-            chkManageQtyAsInteger.Size = new Size(211, 18);
-            chkManageQtyAsInteger.TabIndex = 5;
-            chkManageQtyAsInteger.Text = "Gestionar cantidades como entero";
-            chkManageQtyAsInteger.UseVisualStyleBackColor = true;
             // 
             // txtQuantity
             // 
@@ -172,14 +161,6 @@
             btnCancel.Text = "Cancelar";
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
-            // 
-            // txtUnitName
-            // 
-            txtUnitName.Dock = DockStyle.Bottom;
-            txtUnitName.Location = new Point(0, 12);
-            txtUnitName.Name = "txtUnitName";
-            txtUnitName.Size = new Size(240, 22);
-            txtUnitName.TabIndex = 4;
             // 
             // lblUnitName
             // 
@@ -235,7 +216,6 @@
             // panel7
             // 
             panel7.Controls.Add(panel6);
-            panel7.Controls.Add(chkManageQtyAsInteger);
             panel7.Controls.Add(btnCancel);
             panel7.Controls.Add(btnConfirm);
             panel7.Controls.Add(chkEnabled);
@@ -251,13 +231,23 @@
             // panel6
             // 
             panel6.BorderStyle = BorderStyle.FixedSingle;
-            panel6.Controls.Add(txtUnitName);
+            panel6.Controls.Add(comboBoxUnits);
             panel6.Controls.Add(lblUnitName);
             panel6.Dock = DockStyle.Top;
             panel6.Location = new Point(0, 152);
             panel6.Name = "panel6";
             panel6.Size = new Size(242, 36);
             panel6.TabIndex = 4;
+            // 
+            // comboBoxUnits
+            // 
+            comboBoxUnits.Dock = DockStyle.Bottom;
+            comboBoxUnits.FlatStyle = FlatStyle.Flat;
+            comboBoxUnits.FormattingEnabled = true;
+            comboBoxUnits.Location = new Point(0, 12);
+            comboBoxUnits.Name = "comboBoxUnits";
+            comboBoxUnits.Size = new Size(240, 22);
+            comboBoxUnits.TabIndex = 14;
             // 
             // panel4
             // 
@@ -366,13 +356,11 @@
         private Label label4;
         private ComboBox comboBoxCategory;
         private TextBox txtProductName;
-        private CheckBox chkManageQtyAsInteger;
         private TextBox txtQuantity;
         private Label lblDescription;
         private TextBox txtDescription;
         private Button btnConfirm;
         private Button btnCancel;
-        private TextBox txtUnitName;
         private Label lblUnitName;
         private CheckBox chkEnabled;
         private Panel panel1;
@@ -385,5 +373,6 @@
         private Panel panel7;
         private Label lblHeader;
         private Panel panel8;
+        private ComboBox comboBoxUnits;
     }
 }

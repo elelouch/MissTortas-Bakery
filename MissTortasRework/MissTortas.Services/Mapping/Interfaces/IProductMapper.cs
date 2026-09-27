@@ -1,6 +1,5 @@
 ﻿using MissTortas.Domain.Products;
 using MissTortas.Services.DTO.Products;
-using MissTortas.Services.Interfaces;
 using MissTortas.Services.Repositories.DTO;
 
 namespace MissTortas.Services.Mapping.Interfaces

@@ -43,10 +43,14 @@ namespace MissTortas.Services
             }
 
             var unit = await productRepository.FindUnitByIdAsync(dto.UnitId) ?? throw new UnitNotFoundException("Unit not found.");
-
             if(dto.Quantity < 0)
             {
-                throw new InvalidOperationException("Cannot set negative quantities.");
+                throw new QuantityException("Negative quantities are not valid.");
+            }
+
+            if(Math.Round(dto.Quantity) != dto.Quantity && unit.TreatAsInteger)
+            {
+                throw new QuantityException("Quantity must be integer.");
             }
 
             var product = new Product
@@ -316,15 +320,19 @@ namespace MissTortas.Services
 
         public async Task<UnitDTO> CreateUnitAsync(UnitDTO unitDto)
         {
-            Unit unit = await productRepository.FindUnitByIdAsync(unitDto.Id) ?? new()
+            Unit? unit = await productRepository.FindUnitByIdAsync(unitDto.Id);
+            if(unit != null)
+                return productMapper.ToUnitDTO(unit);
+
+            Unit newUnit = new()
             {
                 Name = unitDto.Name,
                 TreatAsInteger = unitDto.TreatAsInteger,
             };
 
-            await productRepository.InsertUnitAsync(unit);
+            await productRepository.InsertUnitAsync(newUnit);
             await productRepository.SaveChangesAsync();
-            return productMapper.ToUnitDTO(unit);
+            return productMapper.ToUnitDTO(newUnit);
         }
 
         public async Task<List<UnitDTO>> GetAllUnitsAsync()

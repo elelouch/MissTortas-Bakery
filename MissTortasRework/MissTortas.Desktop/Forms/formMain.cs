@@ -26,6 +26,7 @@ namespace MissTortas.Desktop.Forms
         private formRoles? formRoles;
         private formCategories? formCategories;
         private formOrders? formOrders;
+        private formProducts? formProducts;
         private formPreparations? formPreparations;
 
         public formMain(
@@ -156,6 +157,20 @@ namespace MissTortas.Desktop.Forms
                 MdiParent = this
             };
             productsForm.Show();
+            if (formProducts == null)
+            {
+                formProducts = new formProducts(productService)
+                {
+                    MdiParent = this
+                };
+                formProducts.Show();
+                formProducts.Disposed += FormProducts_Disposed;
+            }
+            else
+            {
+                formProducts.WindowState = FormWindowState.Normal;
+                formProducts.BringToFront();
+            }
         }
 
         private void orderManagementToolStripMenuItem_Click(object sender, EventArgs e)

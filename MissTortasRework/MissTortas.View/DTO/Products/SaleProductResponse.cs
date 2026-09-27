@@ -9,6 +9,9 @@ namespace MissTortas.View.DTO.Products
         public decimal SalePrice { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
+        public long CategoryId { get; set; }
+        public long UnitId { get; set; }
+        public bool Enabled { get; set; }
         public long StockProductId { get; set; }
         public List<string> FilePaths { get; set; } = [];
         public bool AllowDecimalAsk { get; set; }

@@ -211,5 +211,11 @@ namespace MissTortas.Desktop.Services.ProductService
                 }
             }
         }
+
+        public async Task<List<ProductUnit>> GetUnitsAsync()
+        {
+            var units = await httpClient.GetAsync<List<ProductUnit>>("products/units");
+            return units!;
+        }
     }
 }

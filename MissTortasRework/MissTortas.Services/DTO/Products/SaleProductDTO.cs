@@ -8,6 +8,9 @@
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public long StockProductId { get; set; }
+        public long CategoryId { get; set; }
+        public long UnitId { get; set; }
+        public bool Enabled { get; set; }
         public bool AllowDecimalAsk { get; set; }
     }
 }

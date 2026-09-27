@@ -9,7 +9,7 @@ namespace MissTortas.Desktop.Services
         {
             return new CreateSaleProductRequest
             {
-                Unit = saleProduct.Unit,
+                UnitId = saleProduct.UnitId,
                 SaleProductName = saleProduct.Name,
                 SalePrice = saleProduct.SalePrice,
                 SaleQuantity = saleProduct.Quantity,
@@ -26,7 +26,7 @@ namespace MissTortas.Desktop.Services
         {
             return new SaleProduct
             {
-                Unit = request.Unit,
+                UnitId = request.UnitId,
                 Name = request.SaleProductName,
                 SalePrice = request.SalePrice,
                 Quantity = request.SaleQuantity,

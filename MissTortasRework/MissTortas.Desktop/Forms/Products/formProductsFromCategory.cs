@@ -61,9 +61,7 @@ namespace MissTortas.Desktop.Forms.Products
 
         private void btnAddProduct_Click(object sender, EventArgs e)
         {
-            var createProductForm = productCategory != null ?
-                new formCreateStockProduct(productService, productCategory)
-                : new formCreateStockProduct(productService);
+            var createProductForm = new formCreateStockProduct(productService);
             createProductForm.OnStockProductCreated += CreateProductForm_OnStockProductCreated;
             createProductForm.ShowDialog();
         }
@@ -83,7 +81,7 @@ namespace MissTortas.Desktop.Forms.Products
             if (dgvProducts.SelectedRows[0].DataBoundItem is not Product product)
                 return;
 
-            var modifyProductForm = new formCreateStockProduct(productService, productCategory, product);
+            var modifyProductForm = new formCreateStockProduct(productService, product);
             modifyProductForm.OnStockProductModified += ModifyProductForm_OnStockProductModified;
             modifyProductForm.ShowDialog();
         }

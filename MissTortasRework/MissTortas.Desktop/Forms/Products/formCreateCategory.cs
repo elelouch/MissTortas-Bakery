@@ -30,7 +30,7 @@ namespace MissTortas.Desktop.Forms.Products
         {
             try
             {
-                var name = Validation.ValidateAndSanitize(txtCategoryName.Text, 3, 256);
+                var name = Validation.ValidateAndSanitize(txtCategoryName.Text, 3, 256, "Nombre");
                 var newCategory = new ProductCategory
                 {
                     Name = name,

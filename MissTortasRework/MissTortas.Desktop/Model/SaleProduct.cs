@@ -8,7 +8,7 @@
         public decimal Quantity { get; set; }
         public decimal SalePrice { get; set; }
         public long CategoryId { get; set; }
-        public string Unit { get; set; } = string.Empty;
+        public long UnitId { get; set; }
         public bool Enabled { get; set; }
         public long StockProductId { get; set; }
         public List<string> FilePaths { get; set; } = [];

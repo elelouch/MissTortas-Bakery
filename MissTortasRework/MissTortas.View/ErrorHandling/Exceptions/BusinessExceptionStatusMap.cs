@@ -20,7 +20,8 @@ namespace MissTortas.View.ErrorHandling.Exceptions
             [typeof(UserNotFoundException)] = (StatusCodes.Status404NotFound, "User not found"),
 
             // --- 409 Conflict: resource already exists, or valid request but current state forbids it ---
-            [typeof(AlreadyCreatedException)] = (StatusCodes.Status409Conflict, "Resource already exists"),
+            [typeof(QuantityException)] = (StatusCodes.Status409Conflict, "Quantity is not correct."),
+            [typeof(AlreadyCreatedException)] = (StatusCodes.Status409Conflict, "Resource already exists."),
             [typeof(ChildAppendException)] = (StatusCodes.Status409Conflict, "Cannot append child"),
             [typeof(InvalidOrderPreparationStateException)] = (StatusCodes.Status409Conflict, "Invalid order preparation state"),
             [typeof(InvalidOrderStateException)] = (StatusCodes.Status409Conflict, "Invalid order state"),

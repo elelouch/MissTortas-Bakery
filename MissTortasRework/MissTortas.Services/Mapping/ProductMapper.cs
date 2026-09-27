@@ -1,6 +1,5 @@
 ﻿using MissTortas.Domain.Products;
 using MissTortas.Services.DTO.Products;
-using MissTortas.Services.Interfaces;
 using MissTortas.Services.Mapping.Interfaces;
 using MissTortas.Services.Repositories.DTO;
 
@@ -164,7 +163,10 @@ namespace MissTortas.Services.Mapping
                 Price = dto.SalePrice,
                 Name = dto.Name,
                 Description = dto.Description,
-                StockProductId = dto.StockProductId
+                StockProductId = dto.StockProductId,
+                CategoryId = dto.CategoryId,
+                UnitId = dto.UnitId,
+                Enabled = dto.Enabled
             };
         }
         public List<SaleProductDTO> SaleProductToDTO(IEnumerable<SaleProductDADto> dtos)

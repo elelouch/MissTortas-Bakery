@@ -9,34 +9,30 @@ namespace MissTortas.Desktop.Forms.Products
     public partial class formCreateStockProduct : Form
     {
         private readonly IProductService productService;
-        private readonly ProductCategory? productCategory;
         private readonly Product? productToModify;
-        private readonly long CategoryId;
+        private List<ProductCategory> categories = [];
+        private List<ProductUnit> units = [];
         public event EventHandler<StockProductCreatedArgs>? OnStockProductCreated;
         public event EventHandler<StockProductModifiedArgs>? OnStockProductModified;
 
-        public formCreateStockProduct(IProductService productService, ProductCategory? pc, Product? product)
+        public formCreateStockProduct(IProductService productService, Product? product)
         {
             InitializeComponent();
             this.productService = productService;
-            this.productCategory = pc;
-            this.productToModify = product;
-            if (product != null)
+            productToModify = product;
+            if (productToModify != null)
             {
-                this.lblHeader.Text = $"Modificando producto {product.Name} ({product.Id}).";
-                this.chkEnabled.Checked = product.Enabled;
+                lblHeader.Text += $"";
+                lblHeader.Text = $"Modificando producto {productToModify.Name} ({productToModify.Id}).Categoria {productToModify.CategoryId}.";
+                chkEnabled.Checked = productToModify.Enabled;
             }
             else
             {
-                this.lblHeader.Text = $"Crear producto.";
+                lblHeader.Text = $"Creando producto.";
             }
-            if (pc != null)
-            {
-                this.lblHeader.Text += $"Categoria {pc.ProductCategoryId}.";
-            }
+
         }
-        public formCreateStockProduct(IProductService productService, ProductCategory pc) : this(productService, pc, null) { }
-        public formCreateStockProduct(IProductService productService) : this(productService, null, null) { }
+        public formCreateStockProduct(IProductService productService) : this(productService, null) { }
 
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -48,24 +44,36 @@ namespace MissTortas.Desktop.Forms.Products
         {
             try
             {
-                List<ProductCategory> cats = productCategory != null ? [productCategory] : await productService.GetCategoriesAsync(true, true);
-                comboBoxCategory.DataSource = cats;
+                categories = await productService.GetCategoriesAsync(true, true);
+                units = await productService.GetUnitsAsync();
+                if (productToModify != null)
+                {
+                    categories = [.. categories.Where(c => c.ProductCategoryId == productToModify.CategoryId)];
+                    units = [.. units.Where(c => c.Id == productToModify.UnitId)];
+                }
+                comboBoxCategory.DataSource = categories;
+                comboBoxUnits.DataSource = units;
+                comboBoxUnits.DisplayMember = nameof(ProductUnit.Name);
+                comboBoxUnits.ValueMember = nameof(ProductUnit.Id);
                 comboBoxCategory.DisplayMember = nameof(ProductCategory.Name);
                 comboBoxCategory.ValueMember = nameof(ProductCategory.ProductCategoryId);
 
+                if(categories.Count <= 0)
+                {
+
+                }
+
                 if (productToModify != null)
                 {
-                    this.Text = $"Modificando producto: {productToModify.Id}";
-                    this.txtProductName.ReadOnly = true ;
-                    this.chkEnabled.Visible = true;
-                    this.chkManageQtyAsInteger.Visible = false;
+                    Text = $"Modificando producto: {productToModify.Id}";
+                    txtProductName.ReadOnly = true ;
+                    chkEnabled.Visible = true;
                     ProductToForm(productToModify);
                 }
                 else
                 {
-                    this.Text = "Creando producto.";
-                    this.chkEnabled.Visible = false;
-                    this.chkManageQtyAsInteger.Visible = true;
+                    Text = "Creando producto.";
+                    chkEnabled.Visible = false;
                 }
             }
             catch (ApiException exc)
@@ -134,23 +142,25 @@ namespace MissTortas.Desktop.Forms.Products
 
         private Product FormToProduct()
         {
-            var manageQtyAsInteger = chkManageQtyAsInteger.Checked;
-            var qty = ParseQuantity(txtQuantity.Text, manageQtyAsInteger);
-            var name = Validation.ValidateAndSanitize(txtProductName.Text, 3, 256);
-            var description = Validation.ValidateAndSanitize(txtDescription.Text, 3, 256);
-            var unit = Validation.ValidateAndSanitize(txtUnitName.Text, 3, 256);
+            var name = Validation.ValidateAndSanitize(txtProductName.Text, 3, 256, "Nombre");
+            var description = Validation.ValidateAndSanitize(txtDescription.Text, 3, 256, "Descripcion");
 
-            if (comboBoxCategory.SelectedItem is not ProductCategory selected)
+            if (comboBoxCategory.SelectedItem is not ProductCategory selectedCategory)
             {
-                throw new InvalidOperationException("Not valid item.");
+                throw new FormatException("La categoria seleccionada no es valida. Debe asegurarse que existen categorias cargadas y se selecciono una valida.");
             }
+            if (comboBoxUnits.SelectedItem is not ProductUnit selectedUnit)
+            {
+                throw new FormatException("La unidad seleccionada no es valida. Debe asegurarse que existen unidades cargadas y se selecciono una valida.");
+            }
+            var qty = ParseQuantity(txtQuantity.Text, selectedUnit.TreatAsInteger);
             var newProduct = new Product
             {
                 Name = name,
                 Description = description,
                 Quantity = qty,
-                CategoryId = selected.ProductCategoryId,
-                Unit = unit,
+                CategoryId = selectedCategory.ProductCategoryId,
+                UnitId = selectedUnit.Id,
                 Enabled = chkEnabled.Checked
             };
             return newProduct;
@@ -161,14 +171,16 @@ namespace MissTortas.Desktop.Forms.Products
             txtProductName.Text = product.Name;
             txtDescription.Text = product.Description;
             txtQuantity.Text = product.Quantity.ToString();
-            txtUnitName.Text = product.Unit;
             chkEnabled.Checked = product.Enabled;
         }
 
         public static decimal ParseQuantity(string input, bool manageQuantityAsInteger)
         {
             if (!decimal.TryParse(input, NumberStyles.Number, CultureInfo.CurrentCulture, out decimal quantity))
-                throw new FormatException($"'{input}' no es una cantidad valida.");
+                throw new FormatException($"Revise el campo de cantidad. '{input}' no es una cantidad valida.");
+            var rounded = Math.Round(quantity, 0, MidpointRounding.AwayFromZero);
+            if (manageQuantityAsInteger && rounded != quantity)
+                throw new FormatException($"La cantidad esta configurada para ser tratada como unidad.");
 
             return manageQuantityAsInteger
                 ? Math.Round(quantity, 0, MidpointRounding.AwayFromZero)

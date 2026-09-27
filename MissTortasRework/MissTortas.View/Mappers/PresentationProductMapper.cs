@@ -30,6 +30,9 @@ namespace MissTortas.View.Mappers
                 Quantity = dto.Quantity,
                 Name = dto.Name,
                 StockProductId = dto.StockProductId,
+                Enabled = dto.Enabled,
+                UnitId = dto.UnitId,
+                CategoryId = dto.CategoryId,
                 FilePaths = filePaths
             };
         }

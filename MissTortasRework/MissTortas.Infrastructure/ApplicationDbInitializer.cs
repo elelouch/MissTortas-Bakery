@@ -9,6 +9,7 @@ using MissTortas.Infrastructure.Security.Identity;
 using MissTortas.Infrastructure.Security.Permissions;
 using MissTortas.Services;
 using MissTortas.Services.DTO.Orders;
+using MissTortas.Services.DTO.Products;
 using MissTortas.Services.Interfaces;
 using System.Security.Claims;
 
@@ -58,6 +59,7 @@ namespace MissTortas.Infrastructure
             await SeedRolesAsync(services);
             await SeedUsersAsync(services);
             await SeedPermissionsAsync(services);
+            await SeedUnitsAsync(services);
             await SeedOrderTypes(services);
         }
 
@@ -74,7 +76,7 @@ namespace MissTortas.Infrastructure
         public static async Task SeedUnitsAsync(IServiceProvider services)
         {
             using var scope = services.CreateScope();
-            var productService = services.GetRequiredService<ProductService>();
+            var productService = services.GetRequiredService<IProductService>();
 
             UnitDTO[] units = [
                 new UnitDTO { Id = 1, Name = "unidad", TreatAsInteger = true},

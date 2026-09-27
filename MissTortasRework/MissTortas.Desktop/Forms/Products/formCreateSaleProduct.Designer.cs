@@ -33,13 +33,11 @@
             label4 = new Label();
             comboBoxCategory = new ComboBox();
             txtProductName = new TextBox();
-            chkManageQtyAsInteger = new CheckBox();
             txtQuantity = new TextBox();
             lblDescription = new Label();
             txtDescription = new TextBox();
             btnConfirm = new Button();
             btnCancel = new Button();
-            txtUnitName = new TextBox();
             lblUnitName = new Label();
             chkEnabled = new CheckBox();
             ofdFiles = new OpenFileDialog();
@@ -54,6 +52,7 @@
             panel3 = new Panel();
             panel4 = new Panel();
             panel5 = new Panel();
+            comboBoxUnits = new ComboBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             panel7 = new Panel();
             panel9 = new Panel();
@@ -124,18 +123,6 @@
             txtProductName.Size = new Size(272, 15);
             txtProductName.TabIndex = 0;
             // 
-            // chkManageQtyAsInteger
-            // 
-            chkManageQtyAsInteger.AutoSize = true;
-            chkManageQtyAsInteger.Dock = DockStyle.Bottom;
-            chkManageQtyAsInteger.FlatStyle = FlatStyle.Flat;
-            chkManageQtyAsInteger.Location = new Point(0, 312);
-            chkManageQtyAsInteger.Name = "chkManageQtyAsInteger";
-            chkManageQtyAsInteger.Size = new Size(274, 18);
-            chkManageQtyAsInteger.TabIndex = 6;
-            chkManageQtyAsInteger.Text = "Gestionar cantidad como entero";
-            chkManageQtyAsInteger.UseVisualStyleBackColor = true;
-            // 
             // txtQuantity
             // 
             txtQuantity.BorderStyle = BorderStyle.None;
@@ -189,15 +176,6 @@
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
-            // txtUnitName
-            // 
-            txtUnitName.BorderStyle = BorderStyle.None;
-            txtUnitName.Dock = DockStyle.Bottom;
-            txtUnitName.Location = new Point(0, 14);
-            txtUnitName.Name = "txtUnitName";
-            txtUnitName.Size = new Size(272, 15);
-            txtUnitName.TabIndex = 0;
-            // 
             // lblUnitName
             // 
             lblUnitName.AutoSize = true;
@@ -213,7 +191,7 @@
             chkEnabled.AutoSize = true;
             chkEnabled.Dock = DockStyle.Bottom;
             chkEnabled.FlatStyle = FlatStyle.Flat;
-            chkEnabled.Location = new Point(0, 294);
+            chkEnabled.Location = new Point(0, 312);
             chkEnabled.Name = "chkEnabled";
             chkEnabled.Size = new Size(274, 18);
             chkEnabled.TabIndex = 7;
@@ -281,7 +259,7 @@
             panel6.Controls.Add(txtPrice);
             panel6.Controls.Add(lblPrice);
             panel6.Dock = DockStyle.Top;
-            panel6.Location = new Point(0, 175);
+            panel6.Location = new Point(0, 184);
             panel6.Name = "panel6";
             panel6.Size = new Size(274, 34);
             panel6.TabIndex = 1;
@@ -314,7 +292,7 @@
             panel3.Controls.Add(comboBoxCategory);
             panel3.Controls.Add(lblCategory);
             panel3.Dock = DockStyle.Top;
-            panel3.Location = new Point(0, 137);
+            panel3.Location = new Point(0, 146);
             panel3.Name = "panel3";
             panel3.Size = new Size(274, 38);
             panel3.TabIndex = 2;
@@ -333,13 +311,23 @@
             // panel5
             // 
             panel5.BorderStyle = BorderStyle.FixedSingle;
-            panel5.Controls.Add(txtUnitName);
+            panel5.Controls.Add(comboBoxUnits);
             panel5.Controls.Add(lblUnitName);
             panel5.Dock = DockStyle.Top;
             panel5.Location = new Point(0, 106);
             panel5.Name = "panel5";
-            panel5.Size = new Size(274, 31);
+            panel5.Size = new Size(274, 40);
             panel5.TabIndex = 4;
+            // 
+            // comboBoxUnits
+            // 
+            comboBoxUnits.Dock = DockStyle.Bottom;
+            comboBoxUnits.FlatStyle = FlatStyle.Flat;
+            comboBoxUnits.FormattingEnabled = true;
+            comboBoxUnits.Location = new Point(0, 16);
+            comboBoxUnits.Name = "comboBoxUnits";
+            comboBoxUnits.Size = new Size(272, 22);
+            comboBoxUnits.TabIndex = 14;
             // 
             // tableLayoutPanel1
             // 
@@ -382,7 +370,6 @@
             panel9.BackColor = Color.WhiteSmoke;
             panel9.Controls.Add(panel6);
             panel9.Controls.Add(chkEnabled);
-            panel9.Controls.Add(chkManageQtyAsInteger);
             panel9.Controls.Add(panel3);
             panel9.Controls.Add(panel5);
             panel9.Controls.Add(panel4);
@@ -488,13 +475,11 @@
         private Label label4;
         private ComboBox comboBoxCategory;
         private TextBox txtProductName;
-        private CheckBox chkManageQtyAsInteger;
         private TextBox txtQuantity;
         private Label lblDescription;
         private TextBox txtDescription;
         private Button btnConfirm;
         private Button btnCancel;
-        private TextBox txtUnitName;
         private Label lblUnitName;
         private CheckBox chkEnabled;
         private OpenFileDialog ofdFiles;
@@ -517,5 +502,6 @@
         private Panel panel10;
         private Panel panel11;
         private Label lblHeader;
+        private ComboBox comboBoxUnits;
     }
 }

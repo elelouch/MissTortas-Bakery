@@ -4,6 +4,7 @@ namespace MissTortas.Desktop.Services.ProductService
 {
     public interface IProductService
     {
+        public Task<List<ProductUnit>> GetUnitsAsync();
         public Task<Product> ModifyProductAsync(Product product);
         public Task<List<ProductCategory>> GetCategoriesAsync();
         public Task<List<ProductCategory>> GetCategoriesAsync(bool enabled);
