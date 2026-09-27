@@ -76,7 +76,7 @@
             dgvProducts.BorderStyle = BorderStyle.None;
             dgvProducts.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProducts.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn, categoryIdDataGridViewTextBoxColumn, manageQuantityAsIntegerDataGridViewCheckBoxColumn, unitDataGridViewTextBoxColumn, Enabled });
+            dgvProducts.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nameDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn, categoryIdDataGridViewTextBoxColumn, Enabled });
             dgvProducts.DataSource = productBindingSource;
             dgvProducts.Dock = DockStyle.Fill;
             dgvProducts.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -124,20 +124,6 @@
             categoryIdDataGridViewTextBoxColumn.HeaderText = "Identificador de Categoria";
             categoryIdDataGridViewTextBoxColumn.Name = "categoryIdDataGridViewTextBoxColumn";
             categoryIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // manageQuantityAsIntegerDataGridViewCheckBoxColumn
-            // 
-            manageQuantityAsIntegerDataGridViewCheckBoxColumn.DataPropertyName = "ManageQuantityAsInteger";
-            manageQuantityAsIntegerDataGridViewCheckBoxColumn.HeaderText = "Gestionar cantidad como entero";
-            manageQuantityAsIntegerDataGridViewCheckBoxColumn.Name = "manageQuantityAsIntegerDataGridViewCheckBoxColumn";
-            manageQuantityAsIntegerDataGridViewCheckBoxColumn.ReadOnly = true;
-            // 
-            // unitDataGridViewTextBoxColumn
-            // 
-            unitDataGridViewTextBoxColumn.DataPropertyName = "Unit";
-            unitDataGridViewTextBoxColumn.HeaderText = "Unidad";
-            unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
-            unitDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // Enabled
             // 

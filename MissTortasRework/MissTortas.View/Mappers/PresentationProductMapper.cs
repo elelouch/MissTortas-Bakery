@@ -55,11 +55,12 @@ namespace MissTortas.View.Mappers
         {
             return new UpdateSaleProductDTO
             {
+                Enabled = request.Enabled,
                 SaleProductId = saleProductId,
-                Name = request.Name,
-                Description = request.Description,
-                Quantity = request.QuantityAvailable,
-                Price = request.Price
+                Name = request.SaleProductName,
+                Description = request.SaleDescription,
+                Quantity = request.SaleQuantity,
+                Price = request.SalePrice
             };
         }
 

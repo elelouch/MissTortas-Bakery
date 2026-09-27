@@ -9,6 +9,7 @@ namespace MissTortas.Desktop.Services
         {
             return new CreateSaleProductRequest
             {
+                Enabled = saleProduct.Enabled,
                 UnitId = saleProduct.UnitId,
                 SaleProductName = saleProduct.Name,
                 SalePrice = saleProduct.SalePrice,

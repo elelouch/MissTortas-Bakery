@@ -9,5 +9,6 @@
         public long CategoryId { get; set; }
         public string SaleDescription { get; set; } = string.Empty;
         public string SaleImagePath { get; set; } = string.Empty;
+        public bool Enabled { get; set; }
     }
 }

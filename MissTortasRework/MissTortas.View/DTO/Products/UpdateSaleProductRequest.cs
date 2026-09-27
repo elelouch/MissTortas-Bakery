@@ -4,10 +4,11 @@ namespace MissTortas.View.DTO.Products
 {
     public class UpdateSaleProductRequest
     {
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public decimal? QuantityAvailable { get; set; }
-        public decimal? Price { get; set; }
-        public string? Unit { get; set; }
+        public bool Enabled { get; set; }
+        public string? SaleProductName { get; set; }
+        public string? SaleDescription { get; set; }
+        public decimal? SaleQuantity { get; set; }
+        public decimal? SalePrice { get; set; }
+        public long? UnitId { get; set; }
     }
 }

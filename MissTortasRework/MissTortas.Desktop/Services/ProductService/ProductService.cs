@@ -187,7 +187,7 @@ namespace MissTortas.Desktop.Services.ProductService
                     FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
                     fileStreams.Add((stream, fileName));
                 }
-                var ret = await httpClient.PutAsFormAsync<SaleProduct>($"saleproducts/test/{sp.Id}", body, fileStreams);
+                var ret = await httpClient.PutAsFormAsync<SaleProduct>($"saleproducts/{sp.Id}", body, fileStreams);
                 return ret!;
             }
             catch (Exception ex)

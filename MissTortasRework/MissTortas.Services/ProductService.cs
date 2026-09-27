@@ -229,6 +229,10 @@ namespace MissTortas.Services
             {
                 saleProduct.Product.ProductDetail.Description = dto.Description;
             }
+            if (dto.Enabled is bool enabled)
+            {
+                saleProduct.Product.Enabled = enabled;
+            }
             await productRepository.SaveChangesAsync();
             return productMapper.SaleProductToDTO(saleProduct);
         }
