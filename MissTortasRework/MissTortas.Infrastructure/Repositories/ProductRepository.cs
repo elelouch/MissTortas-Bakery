@@ -121,5 +121,13 @@ namespace MissTortas.Infrastructure.Repositories
         {
            await unitsSet.AddAsync(unit);
         }
+
+        public Task<List<SaleProduct>> GetSaleProductsByNameAsync(string name)
+        {
+            return saleProductSet
+                .Include(sp => sp.Product)
+                .Where(sp => sp.Product.Name.Contains(name))
+                .ToListAsync();
+        }
     }
 }

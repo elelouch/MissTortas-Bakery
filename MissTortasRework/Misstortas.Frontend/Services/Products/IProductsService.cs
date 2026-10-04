@@ -6,5 +6,6 @@ namespace Misstortas.Frontend.Services.Products
     {
         public Task<Category[]> GetCategoriesAsync();
         public Task<SaleProduct[]> GetSaleProductsAsync(long categoryId);
+        public Task<SaleProduct[]> SearchSaleProductsAsync(string searchTerm);
     }
 }

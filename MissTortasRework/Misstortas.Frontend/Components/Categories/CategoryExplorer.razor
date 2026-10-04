@@ -6,7 +6,7 @@
     <div class="search-wrapper mb-2">
         <input type="text"
                class="form-control"
-               placeholder="Buscar categoria de productos..."
+               placeholder="Buscar por nombre de producto o de categoria..."
                value="@searchTerm"
                @oninput="OnSearchInput"
                @onfocus="OnSearchFocus" />
@@ -98,6 +98,9 @@
 
     [Parameter]
     public EventCallback<long> OnFinalCategorySelected { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnProductSearched { get; set; }
 
     private record Level(string Name, List<Category> Nodes);
 
@@ -240,10 +243,15 @@
         await OnFinalCategorySelected.InvokeAsync(category.ProductCategoryId);
     }
 
-    private void OnSearchInput(ChangeEventArgs e)
+    private async Task OnSearchInput(ChangeEventArgs e)
     {
         searchTerm = e.Value?.ToString() ?? string.Empty;
         searchClosed = string.IsNullOrWhiteSpace(searchTerm);
+
+        if (searchTerm.Length >= 3)
+        {
+            await OnProductSearched.InvokeAsync(searchTerm);
+        }
     }
 
     private void OnSearchFocus()

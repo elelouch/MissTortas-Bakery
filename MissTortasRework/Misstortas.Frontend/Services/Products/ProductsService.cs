@@ -37,5 +37,11 @@ namespace Misstortas.Frontend.Services.Products
                 return [];
             }
         }
+
+        public async Task<SaleProduct[]> SearchSaleProductsAsync(string searchTerm)
+        {
+            var result = await missTortasClient.GetAsync<SaleProduct[]>($"/saleproducts?name={searchTerm}");
+            return result ?? [];    
+        }
     }
 }

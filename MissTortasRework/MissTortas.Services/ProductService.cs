@@ -345,5 +345,10 @@ namespace MissTortas.Services
             return productMapper.ToUnitDTO(units);
         }
 
+        public async Task<List<SaleProductDTO>> GetSaleProductsByNameAsync(string name)
+        {
+            var products = await productRepository.GetSaleProductsByNameAsync(name);
+            return productMapper.SaleProductToDTO(products);
+        }
     }
 }

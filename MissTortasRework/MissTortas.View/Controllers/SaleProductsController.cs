@@ -19,15 +19,26 @@ namespace MissTortas.View.Controllers
         IPresentationProductMapper presentationProductMapper
     ) : ControllerBase
     {
-        [Authorize(Policy = PolicyName.ManageProducts)]
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<SaleProductResponse>>> GetAllSaleProducts()
+        public async Task<ActionResult<List<SaleProductResponse>>> GetAllSaleProducts(string? name)
         {
-            var saleProducts = await productService.GetAllSaleProductsAsync();
-            var ids = saleProducts.Select(sp => sp.Id).ToArray();
-            var filePaths = await simpleStorage.GetProductFilesAsync(ids);
-            var ret = presentationProductMapper.MapDtoToResponse(saleProducts, filePaths);
-            return ret;
+            if(string.IsNullOrEmpty(name))
+            {
+                var saleProducts = await productService.GetAllSaleProductsAsync();
+                var ids = saleProducts.Select(sp => sp.Id).ToArray();
+                var filePaths = await simpleStorage.GetProductFilesAsync(ids);
+                var ret = presentationProductMapper.MapDtoToResponse(saleProducts, filePaths);
+                return ret;
+            }
+            else
+            {
+                var saleProducts = await productService.GetSaleProductsByNameAsync(name);
+                var ids = saleProducts.Select(sp => sp.Id).ToArray();
+                var filePaths = await simpleStorage.GetProductFilesAsync(ids);
+                var ret = presentationProductMapper.MapDtoToResponse(saleProducts, filePaths);
+                return ret;
+            }
         }
 
         [Authorize(Policy = PolicyName.ManageProducts)]

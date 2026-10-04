@@ -24,7 +24,8 @@ else
             <div class="card shadow-sm">
                 <div class="card-body">
                     <CategoryExplorer Categories="categories"
-                                      OnFinalCategorySelected="LoadProducts" />
+                                      OnFinalCategorySelected="LoadProducts"
+                                      OnProductSearched="OnProductSearched" />
                 </div>
             </div>
         </div>
@@ -46,7 +47,7 @@ else
     {
         categories = (await ProductsService.GetCategoriesAsync()).ToList();   
     }
-    
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if(firstRender)
@@ -60,4 +61,9 @@ else
         saleProducts = await ProductsService.GetSaleProductsAsync(categoryId);
     }
 
+    private async Task OnProductSearched(string searchTerm)
+    {
+        saleProducts = [];
+        saleProducts = await ProductsService.SearchSaleProductsAsync(searchTerm);
+    }
 }
