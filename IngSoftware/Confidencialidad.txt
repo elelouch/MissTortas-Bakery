@@ -1,0 +1,9 @@
+Confidencialidad
+- A que se relaciona el concepto de confidencialidad.
+- Que conceptos estan relacionados a la confidencialidad?
+- Cual de los siguientes NO es considerada una violacion (por lo tanto, un incidente) de la Confidencialidad
+	- Robar credenciales mediante un keylogger.
+	- Escuchar una conexion inalambrica (wireless). Spoofing (Impersonar): Email, DNS, ARP Spoofing.
+	- Destruccion de hardware mediante un incendio provocado.
+	- Ingenieria social para enganiar a un usuario para proveer datos mediante un sitio web falso (Phishing, Smishing)
+-
