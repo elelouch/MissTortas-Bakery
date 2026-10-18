@@ -1,0 +1,2 @@
+1.0.0 - Elias Rojas - 02/10/2026
+	- Se crearon los dos diagramas de casos de uso basados unicamente en lo relatado en casos de uso.
