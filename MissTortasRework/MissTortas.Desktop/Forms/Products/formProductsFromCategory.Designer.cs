@@ -36,18 +36,22 @@
             descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             categoryIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            manageQuantityAsIntegerDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            unitDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             Enabled = new DataGridViewCheckBoxColumn();
             productBindingSource = new BindingSource(components);
             panel2 = new Panel();
             btnRefresh = new Button();
             btnModifyProduct = new Button();
             btnAddProduct = new Button();
+            panel1 = new Panel();
+            txtProductName = new TextBox();
+            lblProductName = new Label();
+            manageQuantityAsIntegerDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            unitDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             tlpProductsFromCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)productBindingSource).BeginInit();
             panel2.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // tlpProductsFromCategory
@@ -55,14 +59,15 @@
             tlpProductsFromCategory.ColumnCount = 2;
             tlpProductsFromCategory.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
             tlpProductsFromCategory.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            tlpProductsFromCategory.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tlpProductsFromCategory.Controls.Add(dgvProducts, 0, 0);
-            tlpProductsFromCategory.Controls.Add(panel2, 1, 0);
+            tlpProductsFromCategory.Controls.Add(dgvProducts, 0, 1);
+            tlpProductsFromCategory.Controls.Add(panel2, 1, 1);
+            tlpProductsFromCategory.Controls.Add(panel1, 0, 0);
             tlpProductsFromCategory.Dock = DockStyle.Fill;
             tlpProductsFromCategory.Location = new Point(0, 0);
             tlpProductsFromCategory.Name = "tlpProductsFromCategory";
-            tlpProductsFromCategory.RowCount = 1;
-            tlpProductsFromCategory.RowStyles.Add(new RowStyle(SizeType.Percent, 61.77778F));
+            tlpProductsFromCategory.RowCount = 2;
+            tlpProductsFromCategory.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
+            tlpProductsFromCategory.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
             tlpProductsFromCategory.Size = new Size(800, 420);
             tlpProductsFromCategory.TabIndex = 0;
             // 
@@ -82,12 +87,12 @@
             dgvProducts.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvProducts.GridColor = SystemColors.Window;
             dgvProducts.ImeMode = ImeMode.Disable;
-            dgvProducts.Location = new Point(3, 3);
+            dgvProducts.Location = new Point(3, 66);
             dgvProducts.MultiSelect = false;
             dgvProducts.Name = "dgvProducts";
             dgvProducts.ReadOnly = true;
             dgvProducts.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
-            dgvProducts.Size = new Size(634, 414);
+            dgvProducts.Size = new Size(634, 351);
             dgvProducts.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
@@ -143,9 +148,9 @@
             panel2.Controls.Add(btnModifyProduct);
             panel2.Controls.Add(btnAddProduct);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(643, 3);
+            panel2.Location = new Point(643, 66);
             panel2.Name = "panel2";
-            panel2.Size = new Size(154, 414);
+            panel2.Size = new Size(154, 351);
             panel2.TabIndex = 3;
             // 
             // btnRefresh
@@ -187,6 +192,44 @@
             btnAddProduct.UseVisualStyleBackColor = false;
             btnAddProduct.Click += btnAddProduct_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(txtProductName);
+            panel1.Controls.Add(lblProductName);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(3, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(634, 57);
+            panel1.TabIndex = 4;
+            // 
+            // txtProductName
+            // 
+            txtProductName.Dock = DockStyle.Bottom;
+            txtProductName.Location = new Point(0, 35);
+            txtProductName.Name = "txtProductName";
+            txtProductName.Size = new Size(634, 22);
+            txtProductName.TabIndex = 1;
+            txtProductName.KeyPress += txtProductName_KeyPress;
+            // 
+            // lblProductName
+            // 
+            lblProductName.AutoSize = true;
+            lblProductName.Dock = DockStyle.Top;
+            lblProductName.Location = new Point(0, 0);
+            lblProductName.Name = "lblProductName";
+            lblProductName.Size = new Size(122, 14);
+            lblProductName.TabIndex = 0;
+            lblProductName.Text = "Nombre de Producto";
+            lblProductName.Click += lblProductName_Click;
+            // 
+            // manageQuantityAsIntegerDataGridViewCheckBoxColumn
+            // 
+            manageQuantityAsIntegerDataGridViewCheckBoxColumn.Name = "manageQuantityAsIntegerDataGridViewCheckBoxColumn";
+            // 
+            // unitDataGridViewTextBoxColumn
+            // 
+            unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
+            // 
             // formProductsFromCategory
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
@@ -202,6 +245,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvProducts).EndInit();
             ((System.ComponentModel.ISupportInitialize)productBindingSource).EndInit();
             panel2.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -222,5 +267,8 @@
         private Button btnRefresh;
         private Button btnAddProduct;
         private Button btnModifyProduct;
+        private Panel panel1;
+        private Label lblProductName;
+        private TextBox txtProductName;
     }
 }

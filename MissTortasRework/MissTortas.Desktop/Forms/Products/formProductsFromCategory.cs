@@ -2,6 +2,9 @@
 using MissTortas.Desktop.Services.ProductService;
 using MissTortas.Desktop.Services.Shared;
 using System.ComponentModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace MissTortas.Desktop.Forms.Products
@@ -10,7 +13,8 @@ namespace MissTortas.Desktop.Forms.Products
     {
         private readonly ProductCategory? productCategory;
         private readonly IProductService productService;
-        private BindingList<Product> products = [];
+    private BindingList<Product> products = new BindingList<Product>();
+    private List<Product> allProducts = new List<Product>();
         public formProductsFromCategory(IProductService productService, ProductCategory? category)
         {
             InitializeComponent();
@@ -27,18 +31,20 @@ namespace MissTortas.Desktop.Forms.Products
                 if (productCategory != null)
                 {
                     this.Text = $"Productos de la categoria: '{productCategory.Name}'({productCategory.ProductCategoryId}) -";
-                    var products = await productService.GetProductsFromCategoryAsync(productCategory.ProductCategoryId);
-                    this.products = [.. products];
+                    var productsFromService = await productService.GetProductsFromCategoryAsync(productCategory.ProductCategoryId);
+                    allProducts = productsFromService.ToList();
+                    this.products = new BindingList<Product>(allProducts);
                     dgvProducts.DataSource = this.products;
                 }
                 else
                 {
                     this.Text = $"Productos";
-                    var products = await productService.GetAllProductsAsync();
-                    this.products = [.. products];
+                    var productsFromService = await productService.GetAllProductsAsync();
+                    allProducts = productsFromService.ToList();
+                    this.products = new BindingList<Product>(allProducts);
                     dgvProducts.DataSource = this.products;
                 }
-                if (products.Count > 0)
+                if (this.products.Count > 0)
                 {
                     var firstRow = dgvProducts.Rows[0];
                     firstRow.Selected = true;
@@ -99,6 +105,63 @@ namespace MissTortas.Desktop.Forms.Products
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadGrid();
+        }
+
+        private void lblProductName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProductName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Schedule filtering after the key press is processed so txtProductName.Text
+            // already contains the new character.
+            this.BeginInvoke(new Action(() => FilterProductsByName(txtProductName.Text)));
+        }
+        private void FilterProductsByName(string filter)
+        {
+            IEnumerable<Product> filtered;
+
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                filtered = allProducts;
+            }
+            else
+            {
+                filtered = allProducts.Where(p => !string.IsNullOrEmpty(p.Name) && p.Name.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            var previousSelectedId = (dgvProducts.SelectedRows.Count > 0 && dgvProducts.SelectedRows[0].DataBoundItem is Product sel) ? sel.Id : (long?)null;
+
+            products = new BindingList<Product>(filtered.ToList());
+            dgvProducts.DataSource = products;
+
+            if (previousSelectedId.HasValue)
+            {
+                var toSelect = products.FirstOrDefault(p => p.Id == previousSelectedId.Value);
+                if (toSelect != null)
+                {
+                    var index = products.IndexOf(toSelect);
+                    if (index >= 0 && index < dgvProducts.Rows.Count)
+                    {
+                        var row = dgvProducts.Rows[index];
+                        row.Selected = true;
+                        dgvProducts.CurrentCell = row.Cells[0];
+                        return;
+                    }
+                }
+            }
+
+            if (products.Count > 0)
+            {
+                var firstRow = dgvProducts.Rows[0];
+                firstRow.Selected = true;
+                dgvProducts.CurrentCell = firstRow.Cells[0];
+            }
+            else
+            {
+                dgvProducts.CurrentCell = null;
+            }
         }
     }
 }
