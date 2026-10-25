@@ -93,6 +93,13 @@
         var lastQty = Cart.GetQuantityAsked(Product.Id);
         var newQuantity = lastQty + QuantityInput;
 
+        if(!Product.AllowDecimalAsk && Math.Round(newQuantity) != newQuantity)
+        {
+            var errorMessage = $"La cantidad debe ser entera.";
+            ToastService.Error(errorMessage);
+            return;
+        }
+
         if (newQuantity > Product.Quantity)
         {
             var errorMessage = $"Solo hay {Product.Quantity} disponibles en stock.";
@@ -110,6 +117,13 @@
     {
         var lastQty = Cart.GetQuantityAsked(Product.Id);
         var newQuantity = lastQty - QuantityInput;
+
+        if(!Product.AllowDecimalAsk && Math.Round(newQuantity) != newQuantity)
+        {
+            var errorMessage = $"La cantidad debe ser entera.";
+            ToastService.Error(errorMessage);
+            return;
+        }
 
         var removed = QuantityInput;
 
