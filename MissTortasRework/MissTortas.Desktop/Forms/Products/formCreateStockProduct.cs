@@ -24,6 +24,8 @@ namespace MissTortas.Desktop.Forms.Products
             {
                 lblHeader.Text += $"";
                 lblHeader.Text = $"Modificando producto {productToModify.Name} ({productToModify.Id}).Categoria {productToModify.CategoryId}.";
+                comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+                comboBoxUnits.DropDownStyle = ComboBoxStyle.DropDownList;
                 chkEnabled.Checked = productToModify.Enabled;
             }
             else

@@ -40,7 +40,7 @@ namespace MissTortas.Desktop.Forms.Products
                 {
                     this.Text = $"Productos";
                     var productsFromService = await productService.GetAllProductsAsync();
-                    allProducts = productsFromService.ToList();
+                    allProducts = [.. productsFromService];
                     this.products = new BindingList<Product>(allProducts);
                     dgvProducts.DataSource = this.products;
                 }

@@ -70,6 +70,8 @@ namespace MissTortas.Desktop.Forms.Products
                     Text = $"Modificando producto de venta: {productToModify.Id}";
                     chkEnabled.Visible = true;
                     chkEnabled.Checked = productToModify.Enabled;
+                    comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+                    comboBoxUnits.DropDownStyle = ComboBoxStyle.DropDownList;
                     SaleProductToForm(productToModify);
                 }
                 else
