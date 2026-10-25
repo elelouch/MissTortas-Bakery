@@ -42,11 +42,15 @@
             btnRefresh = new Button();
             btnModifyProduct = new Button();
             btnAddProduct = new Button();
+            panel2 = new Panel();
+            txtProductName = new TextBox();
+            label1 = new Label();
             productBindingSource = new BindingSource(components);
             tlpProductsFromCategory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)saleProductBindingSource).BeginInit();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)productBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -55,13 +59,15 @@
             tlpProductsFromCategory.ColumnCount = 2;
             tlpProductsFromCategory.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
             tlpProductsFromCategory.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            tlpProductsFromCategory.Controls.Add(dgvProducts, 0, 0);
-            tlpProductsFromCategory.Controls.Add(panel1, 1, 0);
+            tlpProductsFromCategory.Controls.Add(dgvProducts, 0, 1);
+            tlpProductsFromCategory.Controls.Add(panel1, 1, 1);
+            tlpProductsFromCategory.Controls.Add(panel2, 0, 0);
             tlpProductsFromCategory.Dock = DockStyle.Fill;
             tlpProductsFromCategory.Location = new Point(0, 0);
             tlpProductsFromCategory.Name = "tlpProductsFromCategory";
-            tlpProductsFromCategory.RowCount = 1;
-            tlpProductsFromCategory.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tlpProductsFromCategory.RowCount = 2;
+            tlpProductsFromCategory.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
+            tlpProductsFromCategory.RowStyles.Add(new RowStyle(SizeType.Percent, 85F));
             tlpProductsFromCategory.Size = new Size(800, 420);
             tlpProductsFromCategory.TabIndex = 0;
             // 
@@ -77,10 +83,10 @@
             dgvProducts.Columns.AddRange(new DataGridViewColumn[] { Id, SaleProductName, descriptionDataGridViewTextBoxColumn, quantityDataGridViewTextBoxColumn, salePriceDataGridViewTextBoxColumn, stockProductIdDataGridViewTextBoxColumn });
             dgvProducts.DataSource = saleProductBindingSource;
             dgvProducts.Dock = DockStyle.Fill;
-            dgvProducts.Location = new Point(3, 3);
+            dgvProducts.Location = new Point(3, 66);
             dgvProducts.Name = "dgvProducts";
             dgvProducts.ReadOnly = true;
-            dgvProducts.Size = new Size(634, 414);
+            dgvProducts.Size = new Size(634, 351);
             dgvProducts.TabIndex = 0;
             // 
             // Id
@@ -136,9 +142,9 @@
             panel1.Controls.Add(btnModifyProduct);
             panel1.Controls.Add(btnAddProduct);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(643, 3);
+            panel1.Location = new Point(643, 66);
             panel1.Name = "panel1";
-            panel1.Size = new Size(154, 414);
+            panel1.Size = new Size(154, 351);
             panel1.TabIndex = 2;
             // 
             // btnRefresh
@@ -180,6 +186,35 @@
             btnAddProduct.UseVisualStyleBackColor = false;
             btnAddProduct.Click += btnAddProduct_Click;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(txtProductName);
+            panel2.Controls.Add(label1);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(634, 57);
+            panel2.TabIndex = 3;
+            // 
+            // txtProductName
+            // 
+            txtProductName.Dock = DockStyle.Bottom;
+            txtProductName.Location = new Point(0, 35);
+            txtProductName.Name = "txtProductName";
+            txtProductName.Size = new Size(634, 22);
+            txtProductName.TabIndex = 1;
+            txtProductName.KeyPress += txtProductName_KeyPress;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Top;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(122, 14);
+            label1.TabIndex = 0;
+            label1.Text = "Nombre de Producto";
+            // 
             // productBindingSource
             // 
             productBindingSource.DataSource = typeof(Model.Product);
@@ -200,6 +235,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvProducts).EndInit();
             ((System.ComponentModel.ISupportInitialize)saleProductBindingSource).EndInit();
             panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)productBindingSource).EndInit();
             ResumeLayout(false);
         }
@@ -220,5 +257,8 @@
         private DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn salePriceDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn stockProductIdDataGridViewTextBoxColumn;
+        private Panel panel2;
+        private Label label1;
+        private TextBox txtProductName;
     }
 }

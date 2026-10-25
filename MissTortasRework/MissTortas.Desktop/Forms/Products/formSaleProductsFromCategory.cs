@@ -11,6 +11,7 @@ namespace MissTortas.Desktop.Forms.Products
         private readonly ProductCategory? productCategory;
         private readonly IProductService productService;
         private BindingList<SaleProduct> products = [];
+        private List<SaleProduct> allProducts = [];
         public formSaleProductsFromCategory(IProductService productService, ProductCategory? category)
         {
             InitializeComponent();
@@ -27,17 +28,19 @@ namespace MissTortas.Desktop.Forms.Products
             {
                 if (productCategory != null)
                 {
-                    this.Text = $"Products from ({productCategory.ProductCategoryId}) - {productCategory.Name}";
-                    var products = await productService.GetSaleProductsFromCategoryAsync(productCategory.ProductCategoryId);
-                    this.products = [.. products];
-                    dgvProducts.DataSource = this.products;
+                    Text = $"Productos de la categoria: '{productCategory.Name}'({productCategory.ProductCategoryId}) -";
+                    var productsFromService = await productService.GetSaleProductsFromCategoryAsync(productCategory.ProductCategoryId);
+                    allProducts = [.. productsFromService];
+                    products = new BindingList<SaleProduct>(allProducts);
+                    dgvProducts.DataSource = products;
                 }
                 else
                 {
-                    this.Text = $"Products";
-                    var products = await productService.GetAllSaleProductsAsync();
-                    this.products = [.. products];
-                    dgvProducts.DataSource = this.products;
+                    Text = $"Productos";
+                    var productsFromService = await productService.GetAllSaleProductsAsync();
+                    allProducts = [.. productsFromService];
+                    products = new BindingList<SaleProduct>(allProducts);
+                    dgvProducts.DataSource = products;
                 }
                 if (products.Count > 0)
                 {
@@ -103,6 +106,57 @@ namespace MissTortas.Desktop.Forms.Products
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadGrid();
+        }
+        private void txtProductName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Schedule filtering after the key press is processed so txtProductName.Text
+            // already contains the new character.
+            this.BeginInvoke(new Action(() => FilterProductsByName(txtProductName.Text)));
+        }
+        private void FilterProductsByName(string filter)
+        {
+            IEnumerable<SaleProduct> filtered;
+
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                filtered = allProducts;
+            }
+            else
+            {
+                filtered = allProducts.Where(p => !string.IsNullOrEmpty(p.Name) && p.Name.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+
+            var previousSelectedId = (dgvProducts.SelectedRows.Count > 0 && dgvProducts.SelectedRows[0].DataBoundItem is Product sel) ? sel.Id : (long?)null;
+
+            products = new BindingList<SaleProduct>(filtered.ToList());
+            dgvProducts.DataSource = products;
+
+            if (previousSelectedId.HasValue)
+            {
+                var toSelect = products.FirstOrDefault(p => p.Id == previousSelectedId.Value);
+                if (toSelect != null)
+                {
+                    var index = products.IndexOf(toSelect);
+                    if (index >= 0 && index < dgvProducts.Rows.Count)
+                    {
+                        var row = dgvProducts.Rows[index];
+                        row.Selected = true;
+                        dgvProducts.CurrentCell = row.Cells[0];
+                        return;
+                    }
+                }
+            }
+
+            if (products.Count > 0)
+            {
+                var firstRow = dgvProducts.Rows[0];
+                firstRow.Selected = true;
+                dgvProducts.CurrentCell = firstRow.Cells[0];
+            }
+            else
+            {
+                dgvProducts.CurrentCell = null;
+            }
         }
     }
 }

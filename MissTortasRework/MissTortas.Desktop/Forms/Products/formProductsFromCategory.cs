@@ -13,8 +13,8 @@ namespace MissTortas.Desktop.Forms.Products
     {
         private readonly ProductCategory? productCategory;
         private readonly IProductService productService;
-    private BindingList<Product> products = new BindingList<Product>();
-    private List<Product> allProducts = new List<Product>();
+        private BindingList<Product> products = [];
+        private List<Product> allProducts = [];
         public formProductsFromCategory(IProductService productService, ProductCategory? category)
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace MissTortas.Desktop.Forms.Products
                 {
                     this.Text = $"Productos de la categoria: '{productCategory.Name}'({productCategory.ProductCategoryId}) -";
                     var productsFromService = await productService.GetProductsFromCategoryAsync(productCategory.ProductCategoryId);
-                    allProducts = productsFromService.ToList();
+                    allProducts = [.. productsFromService];
                     this.products = new BindingList<Product>(allProducts);
                     dgvProducts.DataSource = this.products;
                 }

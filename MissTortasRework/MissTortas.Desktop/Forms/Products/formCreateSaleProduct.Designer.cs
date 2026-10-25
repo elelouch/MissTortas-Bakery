@@ -194,7 +194,7 @@
             chkEnabled.Location = new Point(0, 312);
             chkEnabled.Name = "chkEnabled";
             chkEnabled.Size = new Size(274, 18);
-            chkEnabled.TabIndex = 7;
+            chkEnabled.TabIndex = 6;
             chkEnabled.Text = "Habilitar";
             chkEnabled.UseVisualStyleBackColor = true;
             // 
@@ -208,7 +208,7 @@
             openFilesList.Location = new Point(42, 34);
             openFilesList.Name = "openFilesList";
             openFilesList.Size = new Size(189, 242);
-            openFilesList.TabIndex = 14;
+            openFilesList.TabIndex = 0;
             // 
             // btnUpload
             // 
@@ -217,7 +217,7 @@
             btnUpload.Location = new Point(43, 281);
             btnUpload.Name = "btnUpload";
             btnUpload.Size = new Size(89, 32);
-            btnUpload.TabIndex = 0;
+            btnUpload.TabIndex = 1;
             btnUpload.Text = "Cargar";
             btnUpload.UseVisualStyleBackColor = false;
             btnUpload.Click += btnUpload_Click;
@@ -229,7 +229,7 @@
             btnRemove.Location = new Point(138, 281);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(93, 32);
-            btnRemove.TabIndex = 1;
+            btnRemove.TabIndex = 2;
             btnRemove.Text = "Quitar";
             btnRemove.UseVisualStyleBackColor = false;
             btnRemove.Click += btnRemove_Click;
@@ -262,7 +262,7 @@
             panel6.Location = new Point(0, 184);
             panel6.Name = "panel6";
             panel6.Size = new Size(274, 34);
-            panel6.TabIndex = 1;
+            panel6.TabIndex = 5;
             // 
             // panel1
             // 
@@ -295,7 +295,7 @@
             panel3.Location = new Point(0, 146);
             panel3.Name = "panel3";
             panel3.Size = new Size(274, 38);
-            panel3.TabIndex = 2;
+            panel3.TabIndex = 4;
             // 
             // panel4
             // 
@@ -306,7 +306,7 @@
             panel4.Location = new Point(0, 75);
             panel4.Name = "panel4";
             panel4.Size = new Size(274, 31);
-            panel4.TabIndex = 3;
+            panel4.TabIndex = 2;
             // 
             // panel5
             // 
@@ -317,7 +317,7 @@
             panel5.Location = new Point(0, 106);
             panel5.Name = "panel5";
             panel5.Size = new Size(274, 40);
-            panel5.TabIndex = 4;
+            panel5.TabIndex = 3;
             // 
             // comboBoxUnits
             // 
@@ -327,7 +327,7 @@
             comboBoxUnits.Location = new Point(0, 16);
             comboBoxUnits.Name = "comboBoxUnits";
             comboBoxUnits.Size = new Size(272, 22);
-            comboBoxUnits.TabIndex = 14;
+            comboBoxUnits.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -351,7 +351,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             tableLayoutPanel1.Size = new Size(800, 420);
-            tableLayoutPanel1.TabIndex = 20;
+            tableLayoutPanel1.TabIndex = 0;
             // 
             // panel7
             // 
@@ -363,7 +363,7 @@
             panel7.Location = new Point(83, 381);
             panel7.Name = "panel7";
             panel7.Size = new Size(634, 36);
-            panel7.TabIndex = 21;
+            panel7.TabIndex = 2;
             // 
             // panel9
             // 
@@ -379,7 +379,7 @@
             panel9.Location = new Point(83, 45);
             panel9.Name = "panel9";
             panel9.Size = new Size(274, 330);
-            panel9.TabIndex = 22;
+            panel9.TabIndex = 1;
             // 
             // panel8
             // 
@@ -391,7 +391,7 @@
             panel8.Location = new Point(443, 45);
             panel8.Name = "panel8";
             panel8.Size = new Size(274, 330);
-            panel8.TabIndex = 21;
+            panel8.TabIndex = 3;
             // 
             // label1
             // 
