@@ -60,6 +60,7 @@ namespace MissTortas.Infrastructure.Repositories
         {
             var ret = saleProductSet
                 .Include(sp => sp.Product)
+                .ThenInclude(p => p.Unit)
                 .Where(sp => sp.Product.ProductCategoryId == categoryId)
                 .ToListAsync();
             return ret;
@@ -126,6 +127,7 @@ namespace MissTortas.Infrastructure.Repositories
         {
             return saleProductSet
                 .Include(sp => sp.Product)
+                .ThenInclude(p => p.Unit)
                 .Where(sp => sp.Product.Name.Contains(name))
                 .ToListAsync();
         }

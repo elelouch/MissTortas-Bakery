@@ -112,7 +112,8 @@ namespace MissTortas.Services.Mapping
                 Name = product.Product.Name,
                 Price = product.SalePrice,
                 Quantity = product.SaleQuantity,
-                StockProductId = product.ProductId
+                StockProductId = product.ProductId,
+                AllowDecimalAsk = !product.Product?.Unit?.TreatAsInteger ?? false,
             };
         }
 
@@ -132,7 +133,7 @@ namespace MissTortas.Services.Mapping
 
         public List<SaleProductDTO> SaleProductToDTO(IEnumerable<SaleProduct> products)
         {
-            return [.. products.Select(prod => SaleProductToDTO(prod))];
+            return [.. products.Select(SaleProductToDTO)];
         }
 
         public ProductDTO ProductToDTO(ProductDADto product)
@@ -166,7 +167,8 @@ namespace MissTortas.Services.Mapping
                 StockProductId = dto.StockProductId,
                 CategoryId = dto.CategoryId,
                 UnitId = dto.UnitId,
-                Enabled = dto.Enabled
+                Enabled = dto.Enabled,
+                AllowDecimalAsk = dto.DecimalAsk
             };
         }
         public List<SaleProductDTO> SaleProductToDTO(IEnumerable<SaleProductDADto> dtos)

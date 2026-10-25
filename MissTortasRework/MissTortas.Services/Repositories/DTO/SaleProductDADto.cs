@@ -17,5 +17,6 @@ namespace MissTortas.Services.Repositories.DTO
         public bool Enabled { get; set; }
         public bool IsAvailable { get; set; }
         public long CategoryId { get; set; }
+        public bool DecimalAsk { get; set; }
     }
 }

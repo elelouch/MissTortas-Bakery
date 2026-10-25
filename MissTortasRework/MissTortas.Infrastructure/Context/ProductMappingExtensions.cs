@@ -37,7 +37,8 @@ namespace MissTortas.Infrastructure.Context
                 UnitId = sp.Product.Unit.Id,
                 Enabled = sp.Product.Enabled,
                 IsAvailable = sp.IsAvailable,
-                CategoryId = sp.Product.ProductCategoryId
+                CategoryId = sp.Product.ProductCategoryId,
+                DecimalAsk = !sp.Product.Unit.TreatAsInteger                
             });
         }
         public static IQueryable<OrderPreparationDADto> ToOrderPreparationDADto(this IQueryable<OrderPreparation> query)
