@@ -347,7 +347,7 @@ namespace MissTortas.Services
 
         public async Task<List<SaleProductDTO>> GetSaleProductsByNameAsync(string name)
         {
-            var products = await productRepository.GetSaleProductsByNameAsync(name.ToLower());
+            var products = await productRepository.GetSaleProductsByNameAsync(name);
             return productMapper.SaleProductToDTO(products);
         }
     }
