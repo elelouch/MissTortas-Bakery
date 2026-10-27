@@ -114,6 +114,7 @@ namespace MissTortas.Services.Mapping
                 Quantity = product.SaleQuantity,
                 StockProductId = product.ProductId,
                 AllowDecimalAsk = !product.Product?.Unit?.TreatAsInteger ?? false,
+                Enabled = product?.Product.Enabled ?? false,
             };
         }
 

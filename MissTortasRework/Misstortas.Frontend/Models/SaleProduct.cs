@@ -8,5 +8,6 @@
         public decimal Quantity { get; set; }
         public List<string> FilePaths { get; set; } = [];
         public bool AllowDecimalAsk { get; set; }
+        public bool Enabled { get; set; }
     }
 }

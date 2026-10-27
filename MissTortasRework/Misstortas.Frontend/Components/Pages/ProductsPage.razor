@@ -59,11 +59,13 @@ else
     private async Task LoadProducts(long categoryId)
     {
         saleProducts = await ProductsService.GetSaleProductsAsync(categoryId);
+        saleProducts = saleProducts.Where(sp => sp.Enabled).ToArray();
     }
 
     private async Task OnProductSearched(string searchTerm)
     {
         saleProducts = [];
         saleProducts = await ProductsService.SearchSaleProductsAsync(searchTerm);
+        saleProducts = saleProducts.Where(sp => sp.Enabled).ToArray();
     }
 }
