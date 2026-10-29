@@ -70,7 +70,7 @@ namespace MissTortas.View.Controllers
 
             if (!result.SignInResult.Succeeded)
             {
-                throw result.SignInResult switch
+                 throw result.SignInResult switch
                 {
                     { IsLockedOut: true } =>
                         new AuthenticationFailedException("User is locked out.", "USRLO1"),
